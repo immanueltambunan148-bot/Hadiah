@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untukmu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #f7f0e6;
+    --paper: #fffdf8;
+    --ink: #4a3f35;
+    --envelope: #f1e0c8;
+    --envelope-shadow: #d9c3a0;
+    --seal: #b5533c;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html, body{
+    height:100%;
+    background:var(--cream);
+    overflow:hidden;
+  }
+
+  body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Alex Brush', cursive;
+    color:var(--ink);
+  }
+
+  .scene{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2.5rem;
+    width:100%;
+    height:100%;
+    padding:2rem;
+    text-align:center;
+  }
+
+  .top-text{
+    font-size:60px;
+    line-height:1.1;
+    opacity:0;
+    animation: fadeIn 1.2s ease forwards 0.2s;
+  }
+
+  .bottom-text{
+    font-size:30px;
+    opacity:0;
+    animation: fadeIn 1.2s ease forwards 0.6s;
+  }
+
+  /* --- Envelope --- */
+  .envelope-wrap{
+    position:relative;
+    width:220px;
+    height:150px;
+    cursor:pointer;
+    opacity:0;
+    animation: fadeIn 1s ease forwards 0.9s, wiggle 3.5s ease-in-out infinite 2s;
+    transform-origin: 50% 90%;
+  }
+
+  .envelope-wrap:hover .envelope-flap{
+    filter: brightness(1.03);
+  }
+
+  .envelope{
+    position:absolute;
+    inset:0;
+    background:var(--envelope);
+    border-radius:4px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    overflow:hidden;
+  }
+
+  .envelope-body{
+    position:absolute;
+    inset:0;
+    background:var(--envelope);
+  }
+
+  .envelope-shadow-left{
+    position:absolute;
+    top:0; left:0;
+    width:0; height:0;
+    border-style:solid;
+    border-width:150px 110px 0 0;
+    border-color: var(--envelope-shadow) transparent transparent transparent;
+    opacity:0.5;
+  }
+
+  .envelope-shadow-right{
+    position:absolute;
+    top:0; right:0;
+    width:0; height:0;
+    border-style:solid;
+    border-width:0 0 150px 110px;
+    border-color: transparent transparent transparent var(--envelope-shadow);
+    opacity:0.5;
+  }
+
+  .envelope-flap{
+    position:absolute;
+    top:0; left:0;
+    width:0; height:0;
+    border-style:solid;
+    border-width:0 110px 95px 110px;
+    border-color: transparent transparent var(--envelope) transparent;
+    transform-origin: top center;
+    transition: transform 0.8s cubic-bezier(.65,-0.2,.35,1.2);
+    z-index:3;
+    filter: brightness(1.08);
+  }
+
+  .seal{
+    position:absolute;
+    top:58px; left:50%;
+    transform:translate(-50%,0);
+    width:34px; height:34px;
+    background:var(--seal);
+    border-radius:50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    z-index:4;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Alex Brush', cursive;
+    color:#fff2e6;
+    font-size:20px;
+    transition: opacity 0.3s ease;
+  }
+
+  .letter{
+    position:absolute;
+    left:14px; right:14px;
+    bottom:6px;
+    height:118px;
+    background:var(--paper);
+    border-radius:2px;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.08);
+    z-index:2;
+    transition: transform 0.9s cubic-bezier(.2,.7,.3,1), opacity 0.6s ease;
+  }
+
+  @keyframes fadeIn{
+    from{ opacity:0; transform:translateY(10px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  @keyframes wiggle{
+    0%, 100% { transform: rotate(0deg); }
+    5%  { transform: rotate(-3deg); }
+    10% { transform: rotate(2.5deg); }
+    15% { transform: rotate(-2deg); }
+    20% { transform: rotate(1.5deg); }
+    25% { transform: rotate(0deg); }
+  }
+
+  .hint{
+    font-size:16px;
+    font-family: 'Alex Brush', cursive;
+    opacity:0;
+    animation: fadeIn 1.2s ease forwards 1.4s;
+    color:#8a7a68;
+  }
+
+  /* opened state */
+  .scene.opening .envelope-wrap{
+    animation: none;
+  }
+
+  .scene.opening .envelope-flap{
+    transform: rotateX(180deg);
+  }
+
+  .scene.opening .seal{
+    opacity:0;
+  }
+
+  .scene.opening .letter{
+    transform: translateY(-160px) scale(1.05);
+  }
+
+  .scene.opening .top-text,
+  .scene.opening .bottom-text,
+  .scene.opening .hint{
+    animation: none;
+    transition: opacity 0.5s ease;
+    opacity:0;
+  }
+
+  .scene.leaving{
+    animation: sceneFade 0.7s ease forwards;
+  }
+
+  @keyframes sceneFade{
+    to{ opacity:0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .envelope-wrap{ animation: fadeIn 1s ease forwards 0.9s !important; }
+    .top-text, .bottom-text, .hint{ animation: fadeIn 0.4s ease forwards !important; }
+  }
+
+  @media (max-width: 480px){
+    .top-text{ font-size:44px; }
+    .bottom-text{ font-size:24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scene" id="scene">
+  <div class="top-text">Untuk Kamu</div>
+
+  <div class="envelope-wrap" id="envelope" role="button" tabindex="0" aria-label="Buka surat">
+    <div class="envelope">
+      <div class="envelope-body"></div>
+      <div class="envelope-shadow-left"></div>
+      <div class="envelope-shadow-right"></div>
+    </div>
+    <div class="letter"></div>
+    <div class="envelope-flap"></div>
+    <div class="seal">S</div>
+  </div>
+
+  <div class="bottom-text">dengan cinta</div>
+  <div class="hint">klik suratnya untuk membuka</div>
+</div>
+
+<script>
+  const scene = document.getElementById('scene');
+  const envelope = document.getElementById('envelope');
+  let opened = false;
+
+  function openLetter(){
+    if(opened) return;
+    opened = true;
+    scene.classList.add('opening');
+
+    setTimeout(() => {
+      scene.classList.add('leaving');
+    }, 900);
+
+    setTimeout(() => {
+      window.location.href = 'page2.html';
+    }, 1600);
+  }
+
+  envelope.addEventListener('click', openLetter);
+  envelope.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      openLetter();
+    }
+  });
+</script>
+
+</body>
+</html>
