@@ -23,11 +23,23 @@
     height:100vh;
   }
 
-  .side-photo{
+  .side-photo-wrap{
+    position:relative;
     flex:1;
+    height:100%;
+    overflow:hidden;
+  }
+
+  .side-photo{
+    display:block;
+    width:100%;
     height:100%;
     object-fit:cover;
     filter:saturate(0.85) brightness(0.85);
+  }
+
+  .side-photo-wrap .pink-blur{
+    background: radial-gradient(circle at 50% 45%, rgba(255,255,255,0.1), rgba(226,64,110,0.45) 55%, rgba(150,20,60,0.55) 100%);
   }
 
   .center-photo-wrap{
@@ -53,8 +65,8 @@
     height:100%;
     object-fit:contain;
     object-position:center;
-    -webkit-mask-image: radial-gradient(ellipse 68% 94% at 50% 50%, #000 62%, transparent 100%);
-            mask-image: radial-gradient(ellipse 68% 94% at 50% 50%, #000 62%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 76% 99% at 50% 50%, #000 70%, transparent 100%);
+            mask-image: radial-gradient(ellipse 76% 99% at 50% 50%, #000 70%, transparent 100%);
   }
 
   .pink-blur{
@@ -74,8 +86,8 @@
     position:absolute;
     top:0; left:0; right:0; bottom:0;
     background:#c23a5e;
-    -webkit-mask-image: radial-gradient(ellipse 68% 94% at 50% 50%, #000 62%, transparent 100%);
-            mask-image: radial-gradient(ellipse 68% 94% at 50% 50%, #000 62%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 76% 99% at 50% 50%, #000 70%, transparent 100%);
+            mask-image: radial-gradient(ellipse 76% 99% at 50% 50%, #000 70%, transparent 100%);
     opacity:0.25;
     z-index:1;
   }
@@ -170,8 +182,14 @@
 <body>
 
 <div class="stage">
-  <img class="side-photo" src="couple-glass.jpg" alt="">
-  <img class="side-photo" src="couple-green.jpg" alt="">
+  <div class="side-photo-wrap">
+    <img class="side-photo" src="couple-glass.jpg" alt="">
+    <div class="pink-blur"></div>
+  </div>
+  <div class="side-photo-wrap">
+    <img class="side-photo" src="couple-green.jpg" alt="">
+    <div class="pink-blur"></div>
+  </div>
 
   <div class="center-photo-wrap">
     <img class="center-photo" src="couple-red.jpg" alt="Foto berdua">
