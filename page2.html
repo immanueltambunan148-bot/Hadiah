@@ -12,7 +12,7 @@
   html, body{ height:100%; }
   body{
     font-family:'Poppins', sans-serif;
-    color:#fff;
+    color:#3a2c2c;
     overflow:hidden;
   }
 
@@ -36,8 +36,8 @@
     left:50%;
     transform:translateX(-50%);
     height:100%;
-    width:38%;
-    min-width:260px;
+    width:42%;
+    min-width:280px;
     background:#c23a5e;
     display:flex;
     align-items:center;
@@ -51,9 +51,33 @@
     left:0;
     width:100%;
     height:100%;
-    object-fit:cover;
-    -webkit-mask-image: radial-gradient(ellipse 70% 96% at 50% 50%, #000 60%, transparent 100%);
-            mask-image: radial-gradient(ellipse 70% 96% at 50% 50%, #000 60%, transparent 100%);
+    object-fit:contain;
+    object-position:center;
+    -webkit-mask-image: radial-gradient(ellipse 68% 94% at 50% 50%, #000 62%, transparent 100%);
+            mask-image: radial-gradient(ellipse 68% 94% at 50% 50%, #000 62%, transparent 100%);
+  }
+
+  .pink-blur{
+    position:absolute;
+    top:-10%;
+    left:-10%;
+    width:120%;
+    height:120%;
+    background: radial-gradient(circle at 50% 40%, rgba(255,255,255,0.15), rgba(226,64,110,0.55) 55%, rgba(180,30,70,0.7) 100%);
+    mix-blend-mode:soft-light;
+    pointer-events:none;
+    z-index:2;
+  }
+
+  .center-photo-wrap::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    background:#c23a5e;
+    -webkit-mask-image: radial-gradient(ellipse 68% 94% at 50% 50%, #000 62%, transparent 100%);
+            mask-image: radial-gradient(ellipse 68% 94% at 50% 50%, #000 62%, transparent 100%);
+    opacity:0.25;
+    z-index:1;
   }
 
   .overlay-text{
@@ -63,7 +87,6 @@
     transform:translate(-50%, -50%);
     z-index:10;
     text-align:center;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.55);
     width:90%;
     max-width:520px;
   }
@@ -72,7 +95,7 @@
     font-family:'Alex Brush', cursive;
     font-size:26px;
     letter-spacing:2px;
-    opacity:0.95;
+    color:#3a2c2c;
     margin-bottom:6px;
   }
 
@@ -80,6 +103,7 @@
     font-family:'Alex Brush', cursive;
     font-size:46px;
     line-height:1.2;
+    color:#2b2020;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -89,7 +113,6 @@
 
   .heart{
     font-size:30px;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
   }
 
   .subtitle{
@@ -97,8 +120,8 @@
     font-weight:300;
     font-size:14px;
     letter-spacing:0.5px;
+    color:#3a2c2c;
     margin-top:10px;
-    opacity:0.95;
   }
 
   .cta{
@@ -109,13 +132,12 @@
     z-index:10;
     font-family:'Alex Brush', cursive;
     font-size:22px;
-    color:#fff;
+    color:#3a2c2c;
     background:none;
     border:none;
-    border-bottom:1px solid rgba(255,255,255,0.7);
+    border-bottom:1px solid rgba(58,44,44,0.7);
     padding-bottom:2px;
     cursor:pointer;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
 
@@ -153,6 +175,7 @@
 
   <div class="center-photo-wrap">
     <img class="center-photo" src="couple-red.jpg" alt="Foto berdua">
+    <div class="pink-blur"></div>
   </div>
 
   <div class="overlay-text">
