@@ -3,27 +3,174 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untukmu</title>
+<title>Happy Birthday, Regina</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *{ margin:0; padding:0; box-sizing:border-box; }
   html, body{ height:100%; }
   body{
-    background:#f7f0e6;
+    font-family:'Poppins', sans-serif;
+    color:#fff;
+    overflow:hidden;
+  }
+
+  .stage{
+    position:relative;
+    display:flex;
+    width:100%;
+    height:100vh;
+  }
+
+  .side-photo{
+    flex:1;
+    height:100%;
+    object-fit:cover;
+    filter:saturate(0.85) brightness(0.85);
+  }
+
+  .center-photo-wrap{
+    position:absolute;
+    top:0;
+    left:50%;
+    transform:translateX(-50%);
+    height:100%;
+    width:38%;
+    min-width:260px;
+    background:#c23a5e;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-family:'Alex Brush', cursive;
-    color:#4a3f35;
-    font-size:36px;
+    overflow:hidden;
+  }
+
+  .center-photo{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    -webkit-mask-image: radial-gradient(ellipse 70% 96% at 50% 50%, #000 60%, transparent 100%);
+            mask-image: radial-gradient(ellipse 70% 96% at 50% 50%, #000 60%, transparent 100%);
+  }
+
+  .overlay-text{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    z-index:10;
     text-align:center;
-    padding:2rem;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.55);
+    width:90%;
+    max-width:520px;
+  }
+
+  .date{
+    font-family:'Alex Brush', cursive;
+    font-size:26px;
+    letter-spacing:2px;
+    opacity:0.95;
+    margin-bottom:6px;
+  }
+
+  .title{
+    font-family:'Alex Brush', cursive;
+    font-size:46px;
+    line-height:1.2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .heart{
+    font-size:30px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+  }
+
+  .subtitle{
+    font-family:'Poppins', sans-serif;
+    font-weight:300;
+    font-size:14px;
+    letter-spacing:0.5px;
+    margin-top:10px;
+    opacity:0.95;
+  }
+
+  .cta{
+    position:absolute;
+    bottom:8%;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:10;
+    font-family:'Alex Brush', cursive;
+    font-size:22px;
+    color:#fff;
+    background:none;
+    border:none;
+    border-bottom:1px solid rgba(255,255,255,0.7);
+    padding-bottom:2px;
+    cursor:pointer;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .cta:hover{
+    opacity:0.75;
+    transform:translateX(-50%) translateY(-2px);
+  }
+
+  .fade-in{
+    opacity:0;
+    animation: fadeIn 1.2s ease forwards;
+  }
+  .delay-1{ animation-delay:0.3s; }
+  .delay-2{ animation-delay:0.7s; }
+  .delay-3{ animation-delay:1.1s; }
+
+  @keyframes fadeIn{
+    from{ opacity:0; transform:translateY(12px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  @media (max-width: 600px){
+    .center-photo-wrap{ width:78%; }
+    .title{ font-size:32px; }
+    .date{ font-size:20px; }
+    .subtitle{ font-size:12px; padding:0 1rem; }
   }
 </style>
 </head>
 <body>
-  <p>Halaman ini nunggu isinya diceritain :)</p>
+
+<div class="stage">
+  <img class="side-photo" src="couple-glass.jpg" alt="">
+  <img class="side-photo" src="couple-green.jpg" alt="">
+
+  <div class="center-photo-wrap">
+    <img class="center-photo" src="couple-red.jpg" alt="Foto berdua">
+  </div>
+
+  <div class="overlay-text">
+    <div class="date fade-in delay-1">07-16-2006</div>
+    <div class="title fade-in delay-2">Happy Birthday, Regina <span class="heart">🤍</span></div>
+    <div class="subtitle fade-in delay-3">A little gift from me to the person i love -abhirama</div>
+  </div>
+
+  <button class="cta fade-in delay-3" id="nextBtn">Click here</button>
+</div>
+
+<script>
+  document.getElementById('nextBtn').addEventListener('click', function(){
+    // arahkan ke halaman berikutnya kalau ada, atau bisa diganti sesuai kebutuhan
+    // window.location.href = 'page3.html';
+    alert('Yay! Makasih udah klik ❤️');
+  });
+</script>
+
 </body>
 </html>
