@@ -59,97 +59,28 @@
     animation: fadeIn 1.2s ease forwards 0.6s;
   }
 
-  /* --- Envelope --- */
+  /* --- Envelope (photo) --- */
   .envelope-wrap{
     position:relative;
-    width:220px;
-    height:150px;
+    width:280px;
+    max-width:70vw;
     cursor:pointer;
     opacity:0;
     animation: fadeIn 1s ease forwards 0.9s, wiggle 3.5s ease-in-out infinite 2s;
-    transform-origin: 50% 90%;
+    transform-origin: 50% 85%;
   }
 
-  .envelope-wrap:hover .envelope-flap{
+  .envelope-photo{
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius:6px;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+    transition: transform 0.9s cubic-bezier(.2,.7,.3,1), opacity 0.6s ease, filter 0.3s ease;
+  }
+
+  .envelope-wrap:hover .envelope-photo{
     filter: brightness(1.03);
-  }
-
-  .envelope{
-    position:absolute;
-    inset:0;
-    background:var(--envelope);
-    border-radius:4px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    overflow:hidden;
-  }
-
-  .envelope-body{
-    position:absolute;
-    inset:0;
-    background:var(--envelope);
-  }
-
-  .envelope-shadow-left{
-    position:absolute;
-    top:0; left:0;
-    width:0; height:0;
-    border-style:solid;
-    border-width:150px 110px 0 0;
-    border-color: var(--envelope-shadow) transparent transparent transparent;
-    opacity:0.5;
-  }
-
-  .envelope-shadow-right{
-    position:absolute;
-    top:0; right:0;
-    width:0; height:0;
-    border-style:solid;
-    border-width:0 0 150px 110px;
-    border-color: transparent transparent transparent var(--envelope-shadow);
-    opacity:0.5;
-  }
-
-  .envelope-flap{
-    position:absolute;
-    top:0; left:0;
-    width:0; height:0;
-    border-style:solid;
-    border-width:0 110px 95px 110px;
-    border-color: transparent transparent var(--envelope) transparent;
-    transform-origin: top center;
-    transition: transform 0.8s cubic-bezier(.65,-0.2,.35,1.2);
-    z-index:3;
-    filter: brightness(1.08);
-  }
-
-  .seal{
-    position:absolute;
-    top:58px; left:50%;
-    transform:translate(-50%,0);
-    width:34px; height:34px;
-    background:var(--seal);
-    border-radius:50%;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-    z-index:4;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-family:'Alex Brush', cursive;
-    color:#fff2e6;
-    font-size:20px;
-    transition: opacity 0.3s ease;
-  }
-
-  .letter{
-    position:absolute;
-    left:14px; right:14px;
-    bottom:6px;
-    height:118px;
-    background:var(--paper);
-    border-radius:2px;
-    box-shadow: 0 -2px 6px rgba(0,0,0,0.08);
-    z-index:2;
-    transition: transform 0.9s cubic-bezier(.2,.7,.3,1), opacity 0.6s ease;
   }
 
   @keyframes fadeIn{
@@ -179,16 +110,9 @@
     animation: none;
   }
 
-  .scene.opening .envelope-flap{
-    transform: rotateX(180deg);
-  }
-
-  .scene.opening .seal{
+  .scene.opening .envelope-photo{
+    transform: translateY(-30px) scale(1.08) rotate(-1deg);
     opacity:0;
-  }
-
-  .scene.opening .letter{
-    transform: translateY(-160px) scale(1.05);
   }
 
   .scene.opening .top-text,
@@ -224,14 +148,7 @@
   <div class="top-text">Untuk Kamu</div>
 
   <div class="envelope-wrap" id="envelope" role="button" tabindex="0" aria-label="Buka surat">
-    <div class="envelope">
-      <div class="envelope-body"></div>
-      <div class="envelope-shadow-left"></div>
-      <div class="envelope-shadow-right"></div>
-    </div>
-    <div class="letter"></div>
-    <div class="envelope-flap"></div>
-    <div class="seal">S</div>
+    <img class="envelope-photo" src="envelope.jpg" alt="Amplop dengan segel merah">
   </div>
 
   <div class="bottom-text">dengan cinta</div>
